@@ -3,57 +3,61 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1
-  }
-}));
+import "./navbar.css";
 
 export default function MenuAppBar() {
   const useStyles = makeStyles(theme => ({
-    button: {
-      margin: theme.spacing(1),
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
     },
     input: {
-      display: 'none',
+      display: "none"
     },
+    junkDiv: {
+      flexGrow: 1,
+    },
+    appBar: {
+      background: "#2196f3"
+    }
   }));
 
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar className={classes.appBar} position="static">
         <Toolbar>
-          <Button
-            className = "home_button"
+          <Button edge = "start"
+            onClick={() => {
+              return;
+            }} // TODO ADD IN ROUTING
             variant="contained"
-            color="secondary"
-            className={classes.button}
+            color="primary"
+            className={classes.menuButton}
           >
             Home
           </Button>
           <Button
-            className = "add_purchase_button"
+            onClick={() => {
+              return;
+            }} // TODO ADD IN ROUTING
             variant="contained"
-            color="secondary"
-            className={classes.button}
+            color="primary"
+            className={classes.menuButton}
           >
             Add Purchase
           </Button>
+          <div className = {classes.junkDiv}></div>
           <Button
-          style = {{align: "right"}}
-            align = "right"
-            className = "logout_button"
+            onClick={() => {
+              return;
+            }} // TODO ADD IN ROUTING
+            align="right"
             variant="contained"
-            color="secondary"
+            color="primary"
             className={classes.button}
           >
             Logout
