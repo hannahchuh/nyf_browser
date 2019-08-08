@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import MenuAppBar from "./components/navbar.js";
-import SignIn from "./components/login.js"
+import SignIn from "./components/login.js";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -28,6 +28,7 @@ function App() {
         <div className="App">
           <MenuAppBar />
 
+          <SimpleTable />
           <div className="household_card_wrapper_div">
             <Card className="household_card">
               <CardContent align="left">
