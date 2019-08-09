@@ -6,14 +6,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '95%',
-    marginTop: theme.spacing(3),
+    width: '90%',
     overflowX: 'auto',
-    padding: '30px',
+    padding: '0px',
     borderColor: 'black'
   },
   table: {
@@ -37,13 +35,13 @@ export default function SimpleTable() {
   return (
     
     <Paper className={classes.root}>
-      <Table className={classes.table} style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px'}}>
+      <Table className={classes.table} style={{ padding: "0", margin: "0", borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px'}}>
         <TableHead>
           <TableRow>
             {/*<TableCell>Money Owed</TableCell>*/}
             
             {/*<TableCell align="right">Purchaser</TableCell>*/}
-            <TableCell style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Purchaser</TableCell>
+            <TableCell style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}></TableCell>
             <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Item&nbsp;(g)</TableCell>
             <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Price ($)&nbsp;(g)</TableCell>
             <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Date of purchase&nbsp;(g)</TableCell>
