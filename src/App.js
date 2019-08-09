@@ -11,7 +11,6 @@ import SimpleTable from "./components/oweTable.js";
 import Grid from "@material-ui/core/Grid";
 import Headline2 from "./components/Headline.js";
 import RecurringPurchaseTable from "./components/recurringPurchaseTable.js";
-import Paper from "@material-ui/core/Paper";
 
 function App() {
   const useStyles = makeStyles(theme => ({
@@ -30,6 +29,15 @@ function App() {
   const testHeadline = "sdfjdfsdfs";
   // const bull = <span className={classes.bullet}>•</span>;
   const [isLoggedOut, setIsLoggedOut] = React.useState(true);
+  const [testArray, setTestArray] = React.useState([
+    false,
+    false,
+    false,
+    false,
+    false
+  ] );
+
+  React.useEffect(() => console.log(testArray), [testArray]);
 
   return (
     <>
@@ -79,7 +87,7 @@ function App() {
           </Grid>
 
           <Grid container spacing={0}>
-            <Grid item l xs={9}>
+            <Grid item xs={9}>
               <div className="purchase_owed_card">
                 <Card>
                   <CardContent align="left">
@@ -99,7 +107,7 @@ function App() {
           </Grid>
 
           <Grid container>
-            <Grid item l xs={9}>
+            <Grid item xs={9}>
               <div className="purchase_owed_card">
                 <Card>
                   <CardContent align="left">
