@@ -6,7 +6,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,7 +30,7 @@ const rows = [
   createData('Mike', "Goldfish", "$24", "08-08-19"),
 ];
 
-export default function SimpleTable() {
+const SimpleTable = (props)=> {
   const classes = useStyles();
 
   return (
@@ -43,10 +42,10 @@ export default function SimpleTable() {
             {/*<TableCell>Money Owed</TableCell>*/}
             
             {/*<TableCell align="right">Purchaser</TableCell>*/}
-            <TableCell style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Purchaser</TableCell>
-            <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Item&nbsp;(g)</TableCell>
-            <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Price ($)&nbsp;(g)</TableCell>
-            <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Date of purchase&nbsp;(g)</TableCell>
+            <TableCell style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>{props.firstColName}</TableCell>
+            <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Item</TableCell>
+            <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Price ($)</TableCell>
+            <TableCell align="center" borderColor = "black" style={{ borderStyle: 'solid', borderColor: '#282c34', borderWidth: '1px', fontSize: '14px', color: '#282c34', fontWeight: 'bold'}}>Date of purchase (MM-DD-YY)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -65,4 +64,6 @@ export default function SimpleTable() {
       </Table>
     </Paper>
   );
-}
+};
+
+export default SimpleTable;

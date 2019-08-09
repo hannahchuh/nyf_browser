@@ -3,6 +3,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MenuAppBar from './components/navbar.js';
+import SimpleTable from './components/oweTable.js';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -11,8 +12,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { blueGrey } from "@material-ui/core/colors";
+import CheckboxesGroup from './components/purchase';
+
 
 function App() {
+  const firstTableFirstCol = "Purchaser"
+  const secondTableFirstCol = "Owe to"
   const useStyles = makeStyles({
     bullet: {
       display: "inline-block",
@@ -29,8 +34,6 @@ function App() {
     <div className="App">
       <MenuAppBar/>
 
-      <SimpleTable/>
-      <MenuAppBar />
 
       <div className="household_card_wrapper_div">
         <Card className="household_card">
@@ -53,10 +56,14 @@ function App() {
           variant="contained"
           color="primary"
           onClick = {() =>{return;}}        // TODO ADD IN ROUTING
-        >
+          >
           Add Purchase
         </Button>
       </div>
+
+      <SimpleTable firstColName={firstTableFirstCol}/>
+      <SimpleTable firstColName={secondTableFirstCol}/>
+      <CheckboxesGroup/>
     </div>
   );
 }
