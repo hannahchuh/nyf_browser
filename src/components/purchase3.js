@@ -280,29 +280,31 @@ class Checkboxes extends React.Component {
                   </Grid>
                   {checkboxes}
 
-                  <Grid container className = "grid_right_item">
+                  <Grid container>
                     <Grid>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {
-                          console.log("clicked");
-                          // form new (default) state
+                      <div>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            console.log("clicked");
+                            // form new (default) state
 
-                          this.props.handler(
-                            "",
-                            false,
-                            -1,
-                            "",
-                            false,
-                            -1,
-                            "",
-                            "DEFAULT"
-                          );
-                        }} // TODO ADD IN ROUTING
-                      >
-                        Submit Purchase
-                      </Button>
+                            this.props.handler(
+                              "",
+                              false,
+                              -1,
+                              "",
+                              false,
+                              -1,
+                              "",
+                              "DEFAULT"
+                            );
+                          }} // TODO ADD IN ROUTING
+                        >
+                          Submit Purchase
+                        </Button>
+                      </div>
                     </Grid>
                   </Grid>
                 </CardContent>

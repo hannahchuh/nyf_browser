@@ -10,6 +10,12 @@
 }
 
 
+.checkbox_and_name{
+  display: flex;
+  flex-direction: row;
+  padding-left: 30px;
+}
+
 .add_purchase_button_div {
   padding-left: 30px;
   padding-top: 30px;
@@ -29,4 +35,25 @@
 .purchase_owed_card{
   padding-left: 30px;
   padding-top: 10px;
+}
+
+.add_purchase_card_wrapper_div{
+  padding-top: 30px;
+  padding-left: 30px;
+  max-width: 600 px;
+}
+
+.submit_form{
+  padding-top: 30px;
+  min-width: 650px;
+  padding-left: 30px;
+}
+
+.person_name{
+    padding-right: 10px;
+}
+
+.grid_item{
+  padding-top: 10px;
+  padding-left: 30px;
 }
