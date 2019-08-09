@@ -1,18 +1,27 @@
-import React from "react";
-import "./App.css";
-import MenuAppBar from "./components/navbar.js";
+
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import MenuAppBar from './components/navbar.js';
+import SimpleTable from './components/oweTable.js';
+
+import { makeStyles } from '@material-ui/core/styles';
 import SignIn from "./components/login.js";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import SimpleTable from "./components/oweTable.js";
 import Grid from "@material-ui/core/Grid";
 import Headline2 from "./components/Headline.js";
 import RecurringPurchaseTable from "./components/recurringPurchaseTable.js";
+import Paper from "@material-ui/core/Paper";
+import { blueGrey } from "@material-ui/core/colors";
+import CheckboxesGroup from './components/purchase';
 
+  
 function App() {
+  const firstTableFirstCol = "Purchaser"
+  const secondTableFirstCol = "Owe to"
   const useStyles = makeStyles(theme => ({
     bullet: {
       display: "inline-block",
@@ -40,10 +49,11 @@ function App() {
   React.useEffect(() => console.log(testArray), [testArray]);
 
   return (
-    <>
+    <div>
       {!isLoggedOut ? (
         <SignIn />
       ) : (
+
         <div className="App">
           <MenuAppBar />
 
@@ -86,6 +96,7 @@ function App() {
             <Grid item xs />
           </Grid>
 
+
           <Grid container spacing={0}>
             <Grid item xs={9}>
               <div className="purchase_owed_card">
@@ -98,7 +109,27 @@ function App() {
                     </div>
 
                     <div className="purchase_owed_table">
-                      <SimpleTable />
+                      <SimpleTable firstColName={firstTableFirstCol}/>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={0}>
+            <Grid item l xs={9}>
+              <div className="purchase_owed_card">
+                <Card>
+                  <CardContent align="left">
+                    <div className="purchases_owed_label">
+                      <Typography align="left" variant="h5">
+                        Purchases your Household Members owe to you
+                      </Typography>{" "}
+                    </div>
+
+                    <div className="purchase_owed_table">
+                      <SimpleTable firstColName={secondTableFirstCol}/>
                     </div>
                   </CardContent>
                 </Card>
@@ -116,7 +147,6 @@ function App() {
                         Recurring Purchases
                       </Typography>
                     </div>
-
                     <div className="purchase_owed_table">
                       <RecurringPurchaseTable />
                     </div>
@@ -125,9 +155,26 @@ function App() {
               </div>
             </Grid>
           </Grid>
-        </div>
-      )}
-    </>
+        
+      
+
+      <div className = "add_purchase_button_div">
+        <Button
+          className="add_purchase_button"
+          variant="contained"
+          color="primary"
+          onClick = {() =>{return;}}        // TODO ADD IN ROUTING
+          >
+          Add Purchase
+        </Button>
+      </div>
+
+
+      <CheckboxesGroup/>
+      </div>
+    
+    )}
+    </div>
   );
 }
 
