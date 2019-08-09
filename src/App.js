@@ -81,15 +81,7 @@ function App() {
           <Grid container spacing={1} className="gridbox">
             <Grid item>
               <div className="add_purchase_button_div">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    return;
-                  }} // TODO ADD IN ROUTING
-                >
-                  Add Purchase
-                </Button>
+               House
               </div>
             </Grid>
             <Grid item xs />

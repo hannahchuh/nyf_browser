@@ -17,3 +17,8 @@
   .person_name{
       padding-right: 10px;
   }
+
+  .grid_item{
+    padding-top: 10px;
+    padding-left: 30px;
+  }

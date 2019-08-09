@@ -17,6 +17,7 @@ import "./purchase3.css";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
 
 export default class NewPurchase extends Component {
   constructor(props) {
@@ -34,82 +35,122 @@ export default class NewPurchase extends Component {
     };
   }
 
-  handler(
+  async handler(
     personId,
     newOwesMoney,
     newAmtOwed,
     newItemName,
     newIsRecurring,
     newRecurringVal,
+    newDate,
     switchCode
   ) {
-    let person = this.state.people[personId];
     let updatedPeople = this.state.people;
+    let person;
 
     console.log("ENTERED HANDLER");
+
     switch (switchCode) {
       case "PERSON":
+        person = this.state.people[personId];
         updatedPeople[personId] = {
           name: person.name,
-          owesMoney: person.owesMoney,
+          owesMoney: newOwesMoney,
           amtOwed: person.amtOwed
         };
-        this.setState({
+        await this.setState({
           people: updatedPeople,
           itemName: this.state.itemName,
           isRecurring: this.state.isRecurring,
-          recurringVal: this.state.recurringVal
+          recurringVal: this.state.recurringVal,
+          date: this.state.date
         });
         break;
       case "AMT":
+        person = this.state.people[personId];
         updatedPeople[personId] = {
           name: person.name,
           owesMoney: person.owesMoney,
           amtOwed: newAmtOwed
         };
-        this.setState({
+        await this.setState({
           people: updatedPeople,
           itemName: this.state.itemName,
           isRecurring: this.state.isRecurring,
-          recurringVal: this.state.recurringVal
+          recurringVal: this.state.recurringVal,
+          date: this.state.date
         });
         break;
       case "CYCLE_VAL":
-        this.setState({
+        await this.setState({
           people: this.state.people,
           itemName: this.state.itemName,
           isRecurring: this.state.isRecurring,
-          recurringVal: newRecurringVal
+          recurringVal: newRecurringVal,
+          date: this.state.date
         });
         break;
       case "IS_RECURRING":
-          console.log("IS_RECURRING");
-          console.log(newIsRecurring);
+        console.log("IS_RECURRING");
+        console.log(newIsRecurring);
 
-            if(newIsRecurring){
-
-                this.setState({
-                  people: this.state.people,
-                  itemName: this.state.itemName,
-                  isRecurring: true,
-                  recurringVal: this.state.recurringVal
-                });
-            }
-            else{
-                this.setState({
-                    people: this.state.people,
-                    itemName: this.state.itemName,
-                    isRecurring: false,
-                    recurringVal: this.state.recurringVal
-                  });
-            }
-        console.log(this.state);
+        if (newIsRecurring) {
+          await this.setState({
+            people: this.state.people,
+            itemName: this.state.itemName,
+            isRecurring: true,
+            recurringVal: this.state.recurringVal,
+            date: this.state.date
+          });
+        } else {
+          await this.setState({
+            people: this.state.people,
+            itemName: this.state.itemName,
+            isRecurring: false,
+            recurringVal: this.state.recurringVal,
+            date: this.state.date
+          });
+        }
+        break;
+      case "DATE":
+        await this.setState(this.state);
+        break;
+      case "DEFAULT":
+        await this.setState({
+          itemName: "",
+          isRecurring: false,
+          recurringVal: -1,
+          people: {
+            1: { name: "Chris", owesMoney: false, amtOwed: 0 },
+            2: { name: "Lisa", owesMoney: false, amtOwed: 0 },
+            3: { name: "Grace", owesMoney: false, amtOwed: 0 }
+          },
+          date: ""
+        });
+        console.log("Here");
         break;
     }
+    console.log(this.state);
   }
 
   render() {
-    return <Checkboxes handler={this.handler} people={this.state.people} />;
+    return (
+      <div>
+        <Checkboxes handler={this.handler} people={this.state.people} />;
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            console.log("clicked");
+            // form new (default) state
+
+            this.handler("", false, -1, "", false, -1, "", "DEFAULT");
+          }} // TODO ADD IN ROUTING
+        >
+          Submit Purchase
+        </Button>
+      </div>
+    );
   }
 }
 
@@ -122,14 +163,15 @@ class Checkboxes extends React.Component {
         <div className="checkbox_and_name">
           <Checkbox
             value={person.name}
-            onChange={() =>
+            onChange={(event, checked) =>
               this.props.handler(
                 id,
-                !person.owesMoney,
+                checked,
                 person.amtOwed,
                 "",
                 false,
                 -1,
+                "",
                 "PERSON"
               )
             }
@@ -145,28 +187,11 @@ class Checkboxes extends React.Component {
                 "",
                 false,
                 -1,
+                "",
                 "AMT"
               );
             }}
           />
-
-          <Select
-            onChange={event => {
-              this.props.handler(
-                id,
-                person.owesMoney,
-                person.amtOwed,
-                "",
-                false,
-                event.target.value,
-                "CYCLE_VAL"
-              );
-            }}
-          >
-            <MenuItem value={0}>Daily</MenuItem>
-            <MenuItem value={1}>Monthly</MenuItem>
-            <MenuItem value={2}>Yearly</MenuItem>
-          </Select>
         </div>
       );
     });
@@ -186,22 +211,83 @@ class Checkboxes extends React.Component {
             </div>
           </Grid>
         </Grid>
-        <Checkbox
-          onChange={(event, checked) =>
-            {
 
-                this.props.handler(
-                  "",
-                  false,
-                  -1,
-                  "",
-                  checked,
-                  -1,
-                  "IS_RECURRING"
-                );
-            }
-          }
-        />
+        <Grid container>
+          <Grid>
+            <div className="grid_item">
+              <Typography align="left" variant="h6">
+                Billing Cycle:
+              </Typography>
+              <Select
+                onChange={event => {
+                  console.log(event.target.value);
+                  this.props.handler(
+                    "",
+                    false,
+                    -1,
+                    "",
+                    false,
+                    event.target.value,
+                    "",
+                    "CYCLE_VAL"
+                  );
+                }}
+              >
+                <MenuItem value={0}>Daily</MenuItem>
+                <MenuItem value={1}>Monthly</MenuItem>
+                <MenuItem value={2}>Yearly</MenuItem>
+              </Select>
+            </div>
+          </Grid>
+        </Grid>
+
+        <Grid container>
+          <Grid>
+            <div className="grid_item">
+              <Typography align="left" variant="h6">
+                Recurrent Purchase?
+              </Typography>
+              <Checkbox
+                onChange={(event, checked) => {
+                  this.props.handler(
+                    "",
+                    false,
+                    -1,
+                    "",
+                    checked,
+                    -1,
+                    "",
+                    "IS_RECURRING"
+                  );
+                }}
+              />
+            </div>
+          </Grid>
+        </Grid>
+
+        <Grid container>
+          <Grid>
+            <div className="grid_item">
+              <Typography align="left" variant="h6">
+                Item Description:
+              </Typography>
+              <TextField
+                onChange={event => {
+                  this.props.handler(
+                    0,
+                    false,
+                    -1,
+                    "",
+                    false,
+                    -1,
+                    event.target.value,
+                    "DATE"
+                  );
+                }}
+              />
+            </div>
+          </Grid>
+        </Grid>
         {checkboxes}
       </div>
     );

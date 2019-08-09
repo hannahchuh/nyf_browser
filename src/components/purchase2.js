@@ -22,7 +22,7 @@ const NewPurchase = props => {
     });
     const [checkboxes, setCheckboxes] = React.useState();
     
-    React.useEffect(() => {console.log(testPeople)}, testPeople); 
+    React.useEffect(() => {console.log(testPeople) }, testPeople); 
 
     function updatePeople(personId, newName, newOwesMoney, newAmtOwed){
         let tempPeople = testPeople;
