@@ -137,18 +137,6 @@ export default class NewPurchase extends Component {
     return (
       <div>
         <Checkboxes handler={this.handler} people={this.state.people} />;
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            console.log("clicked");
-            // form new (default) state
-
-            this.handler("", false, -1, "", false, -1, "", "DEFAULT");
-          }} // TODO ADD IN ROUTING
-        >
-          Submit Purchase
-        </Button>
       </div>
     );
   }
@@ -198,97 +186,130 @@ class Checkboxes extends React.Component {
 
     return (
       <div className="root">
-        <Grid container spacing={3}>
-          <Grid item xs={8}>
-            <div className="add_purchase_card_wrapper_div">
+        <Grid container>
+          <Grid>
+            <div className="submit_form">
               <Card>
                 <CardContent align="left">
-                  <Typography align="left" variant="h4">
-                    Add a Purchase for HOUSEHOLD_NAME
-                  </Typography>
+                  <Grid container>
+                    <Grid>
+                      <div className="grid_item">
+                        <Typography align="left" variant="h5">
+                          Add a Purchase for Not Your Family
+                        </Typography>
+                        <hr />
+                      </div>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid>
+                      <div className="grid_item">
+                        <Typography align="left" variant="h6">
+                          Billing Cycle:
+                        </Typography>
+                        <Select
+                          onChange={event => {
+                            console.log(event.target.value);
+                            this.props.handler(
+                              "",
+                              false,
+                              -1,
+                              "",
+                              false,
+                              event.target.value,
+                              "",
+                              "CYCLE_VAL"
+                            );
+                          }}
+                        >
+                          <MenuItem value={0}>Daily</MenuItem>
+                          <MenuItem value={1}>Monthly</MenuItem>
+                          <MenuItem value={2}>Yearly</MenuItem>
+                        </Select>
+                      </div>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid>
+                      <div className="grid_item">
+                        <Typography align="left" variant="h6">
+                          Recurrent Purchase?
+                        </Typography>
+                        <Checkbox
+                          onChange={(event, checked) => {
+                            this.props.handler(
+                              "",
+                              false,
+                              -1,
+                              "",
+                              checked,
+                              -1,
+                              "",
+                              "IS_RECURRING"
+                            );
+                          }}
+                        />
+                      </div>
+                    </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid>
+                      <div className="grid_item">
+                        <Typography align="left" variant="h6">
+                          Item Description:
+                        </Typography>
+                        <TextField
+                          onChange={event => {
+                            this.props.handler(
+                              0,
+                              false,
+                              -1,
+                              "",
+                              false,
+                              -1,
+                              event.target.value,
+                              "DATE"
+                            );
+                          }}
+                        />
+                      </div>
+                    </Grid>
+                  </Grid>
+                  {checkboxes}
+
+                  <Grid container className = "grid_right_item">
+                    <Grid>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          console.log("clicked");
+                          // form new (default) state
+
+                          this.props.handler(
+                            "",
+                            false,
+                            -1,
+                            "",
+                            false,
+                            -1,
+                            "",
+                            "DEFAULT"
+                          );
+                        }} // TODO ADD IN ROUTING
+                      >
+                        Submit Purchase
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </CardContent>
               </Card>
             </div>
           </Grid>
         </Grid>
-
-        <Grid container>
-          <Grid>
-            <div className="grid_item">
-              <Typography align="left" variant="h6">
-                Billing Cycle:
-              </Typography>
-              <Select
-                onChange={event => {
-                  console.log(event.target.value);
-                  this.props.handler(
-                    "",
-                    false,
-                    -1,
-                    "",
-                    false,
-                    event.target.value,
-                    "",
-                    "CYCLE_VAL"
-                  );
-                }}
-              >
-                <MenuItem value={0}>Daily</MenuItem>
-                <MenuItem value={1}>Monthly</MenuItem>
-                <MenuItem value={2}>Yearly</MenuItem>
-              </Select>
-            </div>
-          </Grid>
-        </Grid>
-
-        <Grid container>
-          <Grid>
-            <div className="grid_item">
-              <Typography align="left" variant="h6">
-                Recurrent Purchase?
-              </Typography>
-              <Checkbox
-                onChange={(event, checked) => {
-                  this.props.handler(
-                    "",
-                    false,
-                    -1,
-                    "",
-                    checked,
-                    -1,
-                    "",
-                    "IS_RECURRING"
-                  );
-                }}
-              />
-            </div>
-          </Grid>
-        </Grid>
-
-        <Grid container>
-          <Grid>
-            <div className="grid_item">
-              <Typography align="left" variant="h6">
-                Item Description:
-              </Typography>
-              <TextField
-                onChange={event => {
-                  this.props.handler(
-                    0,
-                    false,
-                    -1,
-                    "",
-                    false,
-                    -1,
-                    event.target.value,
-                    "DATE"
-                  );
-                }}
-              />
-            </div>
-          </Grid>
-        </Grid>
-        {checkboxes}
       </div>
     );
   }

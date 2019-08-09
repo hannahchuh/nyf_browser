@@ -40,16 +40,13 @@ export default class App extends Component{
           data: response.data
         })
         return response.data
-        console.log(response.data);
       }).then(data => {
         let peopleIds = data.people;
         peopleIds.forEach(person => {
           let link = "https://us-central1-notyourfamily-ses.cloudfunctions.net/widgets/user/" + person
-          console.log(link)
           axios.get(link).then(res => {
             let name = res.data.firstName + " " + res.data.lastName
             this.setState({ ids: [...this.state.ids, person]})
-            console.log(this.state.ids)
             this.setState({ curPeople: [...this.state.curPeople, name]})
           })
         })
@@ -58,6 +55,7 @@ export default class App extends Component{
         // handle error
         console.log(error);
       });
+
     }
 
     render(){
@@ -89,38 +87,18 @@ export default class App extends Component{
           </Grid>
 
           <Grid container spacing={0}>
-            <Grid item xs={9}>
-              <div className="purchase_owed_card">
-                <Card>
-                  <CardContent align="left">
-                    <div className="purchases_owed_label">
-                      <Typography align="left" variant="h5">
-                        Purchases Owed to Your Household Members
-                      </Typography>{" "}
-                    </div>
-
-                    <div className="purchase_owed_table">
-                      <SimpleTable firstColName= "Purchases Owed" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={0}>
             <Grid item l xs={9}>
               <div className="purchase_owed_card">
                 <Card>
                   <CardContent align="left">
                     <div className="purchases_owed_label">
                       <Typography align="left" variant="h5">
-                        Purchases Your Household Owes You
+                        Household Transactions
                       </Typography>{" "}
                     </div>
 
                     <div className="purchase_owed_table">
-                      <SimpleTable firstColName="Purchases Owed" />
+                      <SimpleTable transactionIds = {this.state.data.transactions}/>
                     </div>
                   </CardContent>
                 </Card>
@@ -147,21 +125,7 @@ export default class App extends Component{
             </Grid>
           </Grid>
 
-          <div className="add_purchase_button_div">
-            <Button
-              className="add_purchase_button"
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                return;
-              }} // TODO ADD IN ROUTING
-            >
-              Add Purchase
-            </Button>
-          </div>
-
-          {/* <CheckboxesGroup/> */}
-          <NewPurchase />
+          <NewPurchase transactionIds =  {this.state.data.transactions} />
         </div>
      
   );
