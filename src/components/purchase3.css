@@ -1,0 +1,19 @@
+
+
+  .checkbox_and_name{
+    display: flex;
+    flex-direction: row;
+    padding-left: 30px;
+}
+
+
+.add_purchase_card_wrapper_div{
+    padding-top: 30px;
+    padding-left: 30px;
+    max-width: 1000px;
+  }
+  
+
+  .person_name{
+      padding-right: 10px;
+  }

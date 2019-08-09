@@ -17,6 +17,7 @@ import RecurringPurchaseTable from "./components/recurringPurchaseTable.js";
 import Paper from "@material-ui/core/Paper";
 import { blueGrey } from "@material-ui/core/colors";
 import CheckboxesGroup from './components/purchase';
+import NewPurchase from './components/purchase3.js'
 
   
 function App() {
@@ -45,8 +46,6 @@ function App() {
     false,
     false
   ] );
-
-  React.useEffect(() => console.log(testArray), [testArray]);
 
   return (
     <div>
@@ -124,7 +123,7 @@ function App() {
                   <CardContent align="left">
                     <div className="purchases_owed_label">
                       <Typography align="left" variant="h5">
-                        Purchases your Household Members owe to you
+                        Purchases Your Household Owes You
                       </Typography>{" "}
                     </div>
 
@@ -155,9 +154,7 @@ function App() {
               </div>
             </Grid>
           </Grid>
-        
       
-
       <div className = "add_purchase_button_div">
         <Button
           className="add_purchase_button"
@@ -170,7 +167,8 @@ function App() {
       </div>
 
 
-      <CheckboxesGroup/>
+      {/* <CheckboxesGroup/> */}
+      <NewPurchase/>
       </div>
     
     )}
