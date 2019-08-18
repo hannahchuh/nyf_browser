@@ -3,7 +3,7 @@ export interface Household {
   name: string;
   users: Person[];
   currentTransactions: Transaction[];
-  transactions: Transaction[];
+  transactions: Transaction[];    // a history of all transactions that have occured
   billingStart: Date;
   billingCycle: number;
   recurringTransactions: Transaction[];
