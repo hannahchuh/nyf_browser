@@ -13,4 +13,5 @@ Not Your Family keeps track of each expense and who owes what, calculating the e
 * Display the amounts a user owes to all other household members 
 
 <h1>View the App</h1>
+
 ![Image of Screen Capture](https://raw.githubusercontent.com/hannahchuh/nyf_browser/master/screen_capture.png)
