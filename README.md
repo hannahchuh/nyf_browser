@@ -1,4 +1,4 @@
-#Welcome to Not Your Family
+# Welcome to Not Your Family
 
 Whether it's sharing a Netflix membership, buying communal groceries, or even splitting the cost for a new pack of paper towels, dividing expenses for your roomates can be cumbersome. Calculating how much each person is owed every time you make a purchase, and worse, keeping a running tab gets complicated quickly. What if only half the household wants to buy breakfast goods? Or you have one roomate who doesn't need the Netflix subscription? That's where our app comes in--"Not Your Family" is built to make sharing communal costs with those who co-habitate with but aren't related to--people who are 'Not Your Family'--easy and seamless. 
 
